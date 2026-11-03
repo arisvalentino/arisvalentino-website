@@ -292,6 +292,12 @@ def main():
     shutil.copytree(os.path.join(SRC, 'audio'), os.path.join(DIST, 'audio'))
     shutil.copytree(os.path.join(SRC, 'downloads'), os.path.join(DIST, 'downloads'))
     shutil.copytree(os.path.join(SRC, 'lifeline'), os.path.join(DIST, 'lifeline'))
+    # link-in-bio page: shares the site fonts; external links open in a new tab
+    shutil.copytree(os.path.join(SRC, 'links'), os.path.join(DIST, 'links'))
+    lp = os.path.join(DIST, 'links', 'index.html')
+    lh = open(lp, encoding='utf-8').read().replace('/*FONTS*/', FONT_CSS.replace('url(fonts/', 'url(/fonts/'))
+    lh = re.sub(r'<a ([^>]*href="https?://[^"]*")', r'<a target="_blank" rel="noopener" \1', lh)
+    open(lp, 'w', encoding='utf-8').write(lh)
     # 404
     nf = build_legal('impressum', style_b).replace('<title>Impressum – Aris Valentino</title>', '<title>Seite nicht gefunden – Aris Valentino</title>')
     nf = re.sub(r'<main class="wrap legal">.*?</main>', '<main class="wrap legal"><h1 class="legal-h">404</h1><p>Diese Seite gibt es nicht (mehr).</p><p><a class="btn" href="/">Zur Startseite</a> &nbsp; <a class="btn ghost" href="/booking">Booking</a></p></main>', nf, flags=re.S)

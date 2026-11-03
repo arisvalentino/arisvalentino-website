@@ -5,6 +5,7 @@ Dieser Branch (`quellcode`) enthält den Quellcode der Website. Der Branch `main
 ## Aufbau
 - `site/index.html` – Hauptseite (Fans), Quelle der Wahrheit, direkt bearbeiten
 - `site/booking.html` – Booking-Seite (Veranstalter), direkt bearbeiten
+- `site/links/index.html` – Link-in-Bio-Seite (/links/, noindex) für Instagram; Fonts werden beim Build eingesetzt (/*FONTS*/). Erster Button = neuester Song.
 - `site/lifeline/index.html` – LIFELINE-Albumseite (/lifeline/), eigenständig, Songs in `TRACKS` (src + status "single"), Audio in `site/lifeline/audio/` (AAC .m4a)
 - `site/img`, `site/vid2`, `site/audio`, `site/fonts`, `site/downloads` – Medien
 - Englische Texte stehen als `data-en`-Attribute in denselben Dateien; `build_site.py` rendert DE (/) und EN (/en/) vor.
