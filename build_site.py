@@ -15,7 +15,7 @@ FACEBOOK = 'https://www.facebook.com/officialarisvalentino'
 
 # ---------- images: SEO file names + alt texts (de, en) ----------
 IMAGES = {
-    'img/hero-wide.jpg': ('img/aris-valentino-saenger-koeln.jpg', 'Aris Valentino, Sänger und Songwriter aus Köln, in brauner Lederjacke vor blauem Himmel', 'Aris Valentino, singer and songwriter from Cologne, in a brown leather jacket against a blue sky'),
+    'img/hero-wide.jpg': ('img/aris-valentino-pop-rock-saenger.jpg', 'Aris Valentino, Pop-Rock-Sänger und Songwriter, in brauner Lederjacke vor blauem Himmel', 'Aris Valentino, pop rock singer and songwriter, in a brown leather jacket against a blue sky'),
     'img/about-close.jpg': ('img/aris-valentino-portrait-lederjacke.jpg', 'Aris Valentino in Lederjacke mit Gitarre, Schwarz-Weiß-Porträt', 'Aris Valentino in a leather jacket with a guitar, black and white portrait'),
     'img/about.jpg': ('img/aris-valentino-portrait-lederjacke-gitarre.jpg', 'Aris Valentino in Lederjacke mit weißer E-Gitarre, Schwarz-Weiß-Porträt', 'Aris Valentino in a leather jacket with a white electric guitar, black and white portrait'),
     'img/cover.jpg': ('img/aris-valentino-single-cover.jpg', '', ''),
@@ -44,13 +44,13 @@ FONT_CSS = '''@font-face{font-family:"Archivo";font-style:normal;font-display:sw
 LANG_CSS = '\n.lang a{text-decoration:none;padding:4px 6px;color:var(--muted)}\n.lang a:hover{color:var(--fg)}\n.lang a[aria-current]{color:var(--fg);text-decoration:underline;text-underline-offset:4px}\n'
 
 META = {
-    ('index', 'de'): ('Aris Valentino – Sänger & Songwriter aus Köln',
-                      'Aris Valentino: Pop mit Rock-’n’-Roll-Seele aus Köln, mit Wurzeln im Ruhrgebiet. Neue Musik, Live-Termine, Videos, Fotos und Booking.'),
-    ('index', 'en'): ('Aris Valentino – Singer & Songwriter from Cologne',
-                      'Aris Valentino: pop with a rock ’n’ roll soul from Cologne, Germany. New music, live dates, videos, photos and booking.'),
-    ('booking', 'de'): ('Booking – Aris Valentino & Band | Live-Musik aus Köln',
+    ('index', 'de'): ('Aris Valentino – Sänger & Songwriter | Pop mit Rock-’n’-Roll-Seele',
+                      'Aris Valentino: Pop mit Rock-’n’-Roll-Seele, große Stimme und energiegeladene Live-Show mit Band. Neue Musik, Live-Termine, Videos, Fotos und Booking.'),
+    ('index', 'en'): ('Aris Valentino – Singer & Songwriter | Pop with a rock ’n’ roll soul',
+                      'Aris Valentino: pop with a rock ’n’ roll soul, a big voice and a high-energy live show with band. New music, live dates, videos, photos and booking.'),
+    ('booking', 'de'): ('Booking – Aris Valentino & Band | Festivals & Live-Shows',
                         'Aris Valentino & Band buchen: 50+ Shows seit 2022, 3 ausverkaufte Headliner-Shows, Bochum Total, Zeltfestival Ruhr. Festivaltauglich mit eigenem In-Ear-Setup.'),
-    ('booking', 'en'): ('Booking – Aris Valentino & Band | Live music from Cologne',
+    ('booking', 'en'): ('Booking – Aris Valentino & Band | Festivals & live shows',
                         'Book Aris Valentino & Band: 50+ shows since 2022, 3 sold-out headline shows, Bochum Total, Zeltfestival Ruhr. Festival-ready with own in-ear setup.'),
 }
 URLS = {('index', 'de'): '/', ('index', 'en'): '/en/', ('booking', 'de'): '/booking', ('booking', 'en'): '/en/booking'}
@@ -59,7 +59,7 @@ URLS = {('index', 'de'): '/', ('index', 'en'): '/en/', ('booking', 'de'): '/book
 def jsonld(page, lang):
     artist = {
         '@type': 'MusicGroup', '@id': DOMAIN + '/#artist', 'name': 'Aris Valentino',
-        'url': DOMAIN + '/', 'image': DOMAIN + '/img/aris-valentino-saenger-koeln.jpg',
+        'url': DOMAIN + '/', 'image': DOMAIN + '/img/aris-valentino-pop-rock-saenger.jpg',
         'genre': ['Pop', 'Pop-Rock'],
         'foundingLocation': {'@type': 'Place', 'name': 'Köln', 'address': {'@type': 'PostalAddress', 'addressLocality': 'Köln', 'addressCountry': 'DE'}},
         'sameAs': [SPOTIFY, INSTA, TIKTOK, FACEBOOK],
