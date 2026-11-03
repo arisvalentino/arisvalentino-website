@@ -44,4 +44,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://arisvalentino.com/en/booking"/>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://arisvalentino.com/lifeline/</loc>
+    <image:image><image:loc>https://arisvalentino.com/lifeline/lifeline-album-cover-aris-valentino.jpg</image:loc></image:image>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>
