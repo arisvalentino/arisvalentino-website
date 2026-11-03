@@ -65,6 +65,7 @@ def jsonld(page, lang):
         'sameAs': [SPOTIFY, INSTA, TIKTOK, FACEBOOK],
         'member': [{'@type': 'Person', 'name': n} for n in ['Aris Valentino', 'Niklas Bischop', 'Felix Martin', 'Samuel Bojko', 'Simon Finzel']],
         'email': 'mail@arisvalentino.com',
+        'telephone': '+49 173 9760402',
     }
     event = {'@type': 'MusicEvent', 'name': 'Aris Valentino live · Let Me Introduce', 'startDate': '2026-11-21',
              'eventStatus': 'https://schema.org/EventScheduled', 'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
