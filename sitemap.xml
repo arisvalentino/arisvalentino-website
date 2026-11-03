@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://arisvalentino.com/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://arisvalentino.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://arisvalentino.com/en/"/>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-band-gitarrist-live.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-band-live-konzert.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-band-mit-fans.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-gesang-mikrofon-live.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-live-akustikgitarre.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-live-gitarre-band.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-live-konzert-rote-buehne.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-live-publikum-klatscht.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-nach-dem-konzert.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-portrait-gitarre-schwarz-weiss.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-portrait-oldtimer-nacht.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-portrait-studio.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-saenger-koeln.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-single-cover.jpg</image:loc></image:image>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://arisvalentino.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://arisvalentino.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://arisvalentino.com/en/"/>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://arisvalentino.com/booking</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://arisvalentino.com/booking"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://arisvalentino.com/en/booking"/>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-band-live-konzert.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-live-konzert-crowd-haende.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-portrait-lederjacke.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-portrait-studio.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-saenger-koeln.jpg</image:loc></image:image>
+    <image:image><image:loc>https://arisvalentino.com/img/aris-valentino-single-cover.jpg</image:loc></image:image>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://arisvalentino.com/en/booking</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://arisvalentino.com/booking"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://arisvalentino.com/en/booking"/>
+    <changefreq>weekly</changefreq>
+  </url>
+</urlset>
