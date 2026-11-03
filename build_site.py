@@ -373,6 +373,15 @@ def clean_urls():
         h = re.sub(r'((?:src|href|poster|data-audio)=")(?:\.\./)?(img|vid2|fonts|audio|downloads)/', r'\1/\2/', h)
         h = re.sub(r"(['(\"])(?:\.\./)?(vid2|img/g)/", r'\1/\2/', h)
         h = h.replace('url(../fonts/', 'url(/fonts/').replace('url(fonts/', 'url(/fonts/').replace('url("../img/', 'url("/img/').replace('url("img/', 'url("/img/')
+        def ext(m):
+            tag = m.group(0)
+            if 'target=' not in tag:
+                tag = tag[:-1] + ' target="_blank">'
+            if 'rel=' not in tag:
+                tag = tag[:-1] + ' rel="noopener">'
+            return tag
+        # external links + PDFs open in a new tab
+        h = re.sub(r'<a\s[^>]*href="(?:https?://|/downloads/)[^"]*"[^>]*>', ext, h)
         open(f, 'w', encoding='utf-8').write(h)
 
 
