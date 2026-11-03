@@ -17,4 +17,4 @@ python3 -W ignore -I build_site.py "$PWD"
 python3 -I make_github.py "$PWD"
 ```
 Dann den Inhalt von `github/` in den Branch `main` kopieren, committen, pushen.
-Hero-Foto tauschen: `site/img/hero-wide.jpg` ersetzen (wird zu `img/aris-valentino-saenger-koeln.jpg`).
+Hero-Foto tauschen: `site/img/hero-wide.jpg` ersetzen (wird zu `img/aris-valentino-pop-rock-saenger.jpg`).
