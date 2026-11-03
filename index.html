@@ -268,7 +268,7 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
 <a class="nl" href="#live">Live</a>
 <a class="nl" href="#music">Musik</a>
 <a class="nl" href="#videos">Videos</a>
-<a href="/booking#top">Booking</a>
+<a href="/booking">Booking</a>
 <div aria-label="Sprache / Language" class="lang"><a aria-current="page" href="/" hreflang="de">DE</a><a href="/en/" hreflang="en">EN</a></div>
 </nav>
 </div>
@@ -362,7 +362,7 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
 <h2>Booking &amp; Presse</h2>
 <p aria-label="mail at arisvalentino dot com" class="big mail-ob">mail<span class="at">at</span>arisvalentino.com</p>
 <div class="btns">
-<a class="btn" href="/booking#top">Booking-Infos &amp; Anfrage</a>
+<a class="btn" href="/booking">Booking-Infos &amp; Anfrage</a>
 </div>
 </section>
 </main>
@@ -475,5 +475,6 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
   lb.addEventListener('touchend', function(e){ if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); tx = null; });
 })();
 </script>
+<script>document.querySelectorAll('a.logo[href="#top"]').forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});if(location.hash)history.replaceState(null,"",location.pathname+location.search);});});if(location.hash==="#top")history.replaceState(null,"",location.pathname+location.search);</script>
 </body>
 </html>
