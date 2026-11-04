@@ -406,6 +406,18 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .track.on .pi::before{width:3px;height:12px;border:0;margin:0;background:#fff;box-shadow:6px 2px 0 #fff,-6px 4px 0 #fff;animation:av-eq .5s ease-in-out infinite alternate}
 .track .r{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap}
 .track .r:hover{color:var(--fg)}
+.track .tp{display:none}
+/* touch screens: no hover, so each row gets its own play button; the AN/AUS switch is not needed */
+@media (hover:none){
+  #tracks .row.track{grid-template-columns:40px minmax(0,1fr) auto auto;gap:8px 14px}
+  .track .tp{display:block;position:relative;overflow:hidden;width:40px;height:40px;border-radius:50%;border:1px solid #3a3a3d;color:var(--fg);font-size:0;-webkit-tap-highlight-color:transparent;transition:background .2s,border-color .2s}
+  .track .tp::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-35%,-50%);width:0;height:0;border-left:11px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
+  .track.on .tp{background:var(--fg);border-color:var(--fg);color:#000}
+  .track.on .tp::before{transform:translate(-50%,-50%);width:10px;height:12px;border:0;background:linear-gradient(90deg,currentColor 0 3px,transparent 3px 7px,currentColor 7px)}
+  #sound{display:none!important}
+  #tracks.off .row.track{opacity:1}
+  #tracks.off .track .art{filter:none}
+}
 
 .kontakt-solo{max-width:720px}
 
@@ -495,10 +507,10 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 <button aria-checked="false" class="sound" hidden="" id="sound" role="switch" type="button"><span class="sl">Preview</span><span aria-hidden="true" class="sw"><span class="sw-off">OFF</span><span class="sw-on">ON</span><span class="knob"><span class="sp"></span></span></span></button>
 </div>
 <div class="rows tracks off" id="tracks">
-<a class="row track" data-audio="/audio/aris-valentino-changes-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">Changes</span><span class="r">Spotify ↗</span></a>
-<a class="row track" data-audio="/audio/aris-valentino-miracle-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">Miracle</span><span class="r">Spotify ↗</span></a>
-<a class="row track" data-audio="/audio/aris-valentino-if-it-aint-about-love-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">If It Ain't About Love</span><span class="r">Spotify ↗</span></a>
-<a class="row track" data-audio="/audio/aris-valentino-ride-or-die-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">Ride or Die</span><span class="r">Spotify ↗</span></a>
+<a class="row track" data-audio="/audio/aris-valentino-changes-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">Changes</span><span class="tp" role="button" tabindex="0">Play preview</span><span class="r">Spotify ↗</span></a>
+<a class="row track" data-audio="/audio/aris-valentino-miracle-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">Miracle</span><span class="tp" role="button" tabindex="0">Play preview</span><span class="r">Spotify ↗</span></a>
+<a class="row track" data-audio="/audio/aris-valentino-if-it-aint-about-love-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">If It Ain't About Love</span><span class="tp" role="button" tabindex="0">Play preview</span><span class="r">Spotify ↗</span></a>
+<a class="row track" data-audio="/audio/aris-valentino-ride-or-die-hoerprobe.mp3" data-hook="0" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" rel="noopener" target="_blank"><span class="cov"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span aria-hidden="true" class="pi"></span></span><span class="t">Ride or Die</span><span class="tp" role="button" tabindex="0">Play preview</span><span class="r">Spotify ↗</span></a>
 </div>
 </section>
 <section class="wrap" id="press">
@@ -832,6 +844,24 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
     if (audio.readyState >= 1) go(); else audio.addEventListener('loadedmetadata', go, {once:true});
   }
   function stop(r){ if (curRow !== r) return; r.classList.remove('on'); fade(0, 350, function(){ if (!curRow || !curRow.classList.contains('on')) audio.pause(); }); }
+  audio.addEventListener('ended', function(){ if (curRow) curRow.classList.remove('on'); });
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches && hasAudio) {
+    document.getElementById('tracks').classList.remove('off');
+    /* play() must run directly inside the tap, otherwise phones block the sound */
+    var tap = function(r, e){ e.preventDefault(); e.stopPropagation();
+      if (curRow === r && r.classList.contains('on')) { r.classList.remove('on'); audio.pause(); return; }
+      if (curRow && curRow !== r) curRow.classList.remove('on');
+      var src = r.getAttribute('data-audio');
+      if (curRow !== r || !audio.getAttribute('src')) { audio.src = src; }
+      curRow = r; clearInterval(fadeT); audio.volume = 1;
+      r.classList.add('on');
+      var p = audio.play(); if (p && p.catch) p.catch(function(){ r.classList.remove('on'); });
+    };
+    tracks.forEach(function(r){ var b = r.querySelector('.tp'); if (!b) return;
+      b.addEventListener('click', function(e){ tap(r, e); });
+      b.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') tap(r, e); });
+    });
+  }
   if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
     tracks.forEach(function(r){ r.addEventListener('mouseenter', function(){ start(r); }); r.addEventListener('mouseleave', function(){ stop(r); }); });
   }

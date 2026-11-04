@@ -389,6 +389,18 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .track.on .pi::before{width:3px;height:12px;border:0;margin:0;background:#fff;box-shadow:6px 2px 0 #fff,-6px 4px 0 #fff;animation:av-eq .5s ease-in-out infinite alternate}
 .track .r{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap}
 .track .r:hover{color:var(--fg)}
+.track .tp{display:none}
+/* touch screens: no hover, so each row gets its own play button; the AN/AUS switch is not needed */
+@media (hover:none){
+  #tracks .row.track{grid-template-columns:40px minmax(0,1fr) auto auto;gap:8px 14px}
+  .track .tp{display:block;position:relative;overflow:hidden;width:40px;height:40px;border-radius:50%;border:1px solid #3a3a3d;color:var(--fg);font-size:0;-webkit-tap-highlight-color:transparent;transition:background .2s,border-color .2s}
+  .track .tp::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-35%,-50%);width:0;height:0;border-left:11px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
+  .track.on .tp{background:var(--fg);border-color:var(--fg);color:#000}
+  .track.on .tp::before{transform:translate(-50%,-50%);width:10px;height:12px;border:0;background:linear-gradient(90deg,currentColor 0 3px,transparent 3px 7px,currentColor 7px)}
+  #sound{display:none!important}
+  #tracks.off .row.track{opacity:1}
+  #tracks.off .track .art{filter:none}
+}
 
 .kontakt-solo{max-width:720px}
 
