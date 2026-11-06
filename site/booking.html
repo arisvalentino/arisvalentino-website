@@ -372,6 +372,19 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .mosaic .tile{width:auto;height:auto;aspect-ratio:auto;min-width:0;min-height:0;overflow:hidden;background:var(--ph)}
 .mosaic .tile.big{grid-column:span 2;grid-row:span 2}
 .mosaic .tile video{width:100%;height:100%;object-fit:cover}
+/* clips in black & white, lyrics from "Ride or Die" as a big overlay */
+.mosaic .tile video,.mosaic .tile.photo img{filter:grayscale(1) contrast(1.12) brightness(.82)}
+.wall-wrap{position:relative}
+.lyric{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.08em;pointer-events:none;z-index:2;
+  font-family:var(--f-display);font-weight:900;font-stretch:125%;text-transform:uppercase;text-align:center;line-height:.95;letter-spacing:-.01em;color:#fff;
+  font-size:clamp(26px,5.6vw,92px);background:radial-gradient(ellipse 60% 55% at 50% 50%,rgba(0,0,0,.55),rgba(0,0,0,0) 70%)}
+.lyric span{display:block;white-space:nowrap;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.lyric span.in{animation:av-lyric-in .9s cubic-bezier(.2,.7,.2,1) both}
+.lyric span.l2.in{animation-delay:.18s}
+.lyric span.out{animation:av-lyric-out .5s ease-in both}
+@keyframes av-lyric-in{from{opacity:0;filter:blur(14px);transform:translateY(.25em) scale(1.04);letter-spacing:.06em}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes av-lyric-out{to{opacity:0;filter:blur(10px);transform:translateY(-.15em)}}
+@media (max-width:639px){.lyric{font-stretch:112%;font-size:clamp(22px,7.4vw,40px)}}
 @media (max-width:999px){.mosaic{--g:5px}}
 @media (max-width:639px){.mosaic{--g:4px}}
 .facts-line{display:flex;flex-wrap:wrap;gap:8px 0;margin:20px 0 0}
@@ -448,7 +461,10 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
     <span class="mono"><a href="#kontakt" data-en="Contact →" data-de="Kontakt →">Contact →</a></span>
   </div>
   <section id="videos" class="wrap top-wall">
-    <div class="mosaic" id="wall" aria-label="Live clips"></div>
+    <div class="wall-wrap">
+      <div class="mosaic" id="wall" aria-label="Live clips"></div>
+      <div class="lyric" id="lyric" aria-hidden="true"><span class="l1"></span><span class="l2"></span></div>
+    </div>
     <p class="facts-line mono">
       <span data-en="50+ shows since 2022" data-de="50+ Shows seit 2022">50+ shows since 2022</span>
       <span data-en="3× sold-out headline shows" data-de="3× ausverkaufte Headliner-Shows">3× sold-out headline shows</span>
@@ -874,5 +890,10 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 </script>
 <script>document.querySelectorAll('a.logo[href="#top"]').forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});if(location.hash)history.replaceState(null,"",location.pathname+location.search);});});if(location.hash==="#top")history.replaceState(null,"",location.pathname+location.search);</script>
 <script>(function(){var sig=document.querySelector(".hero h1 .sig");if(!sig)return;if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;var sp=document.createElement("span");sp.className="spark";sp.setAttribute("aria-hidden","true");sp.innerHTML=["s1","s2","s3"].map(function(c){return '<svg class="'+c+'" viewBox="0 0 24 24"><path d="M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z" fill="#fff"/></svg>';}).join("");sig.insertBefore(sp,sig.firstChild);function go(){sp.classList.remove("on");void sp.offsetWidth;sp.classList.add("on");}sig.addEventListener("animationend",function(e){if(e.animationName!=="av-write")return;sig.style.animation="none";sig.style.clipPath="none";go();});})();</script>
+<script>(function(){var box=document.getElementById("lyric");if(!box)return;var l1=box.querySelector(".l1"),l2=box.querySelector(".l2");
+var P=[["And ain\u2019t no one","gonna stop us now"],["I feel safer when","you\u2019re by my side"],["And ain\u2019t no one","gonna drag us down"],["You and I","ride or die"]],i=0;
+function show(k){l1.textContent=P[k][0];l2.textContent=P[k][1];[l1,l2].forEach(function(e){e.classList.remove("out","in");void e.offsetWidth;e.classList.add("in");});}
+if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){show(3);[l1,l2].forEach(function(e){e.classList.remove("in")});return;}
+show(0);setInterval(function(){[l1,l2].forEach(function(e){e.classList.remove("in");void e.offsetWidth;e.classList.add("out");});setTimeout(function(){i=(i+1)%P.length;show(i);},500);},4200);})();</script>
 </body>
 </html>
