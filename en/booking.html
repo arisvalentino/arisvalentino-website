@@ -395,6 +395,8 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .mosaic .tile video{width:100%;height:100%;object-fit:cover}
 /* clips in black & white so the colours of the different phones match */
 .mosaic .tile video,.mosaic .tile.photo img{filter:grayscale(1) contrast(1.1)}
+#videos{position:relative}
+.gap-light{position:absolute;pointer-events:none;z-index:2;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%)}
 @media (max-width:999px){.mosaic{--g:5px}}
 @media (max-width:639px){.mosaic{--g:4px}}
 .facts-line{display:flex;flex-wrap:wrap;gap:8px 0;margin:20px 0 0}
@@ -871,5 +873,104 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 </script>
 <script>document.querySelectorAll('a.logo[href="#top"]').forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});if(location.hash)history.replaceState(null,"",location.pathname+location.search);});});if(location.hash==="#top")history.replaceState(null,"",location.pathname+location.search);</script>
 <script>(function(){var sig=document.querySelector(".hero h1 .sig");if(!sig)return;if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;var sp=document.createElement("span");sp.className="spark";sp.setAttribute("aria-hidden","true");sp.innerHTML=["s1","s2","s3"].map(function(c){return '<svg class="'+c+'" viewBox="0 0 24 24"><path d="M12 0C12.8 7.2 16.8 11.2 24 12C16.8 12.8 12.8 16.8 12 24C11.2 16.8 7.2 12.8 0 12C7.2 11.2 11.2 7.2 12 0Z" fill="#fff"/></svg>';}).join("");sig.insertBefore(sp,sig.firstChild);function go(){sp.classList.remove("on");void sp.offsetWidth;sp.classList.add("on");}sig.addEventListener("animationend",function(e){if(e.animationName!=="av-write")return;sig.style.animation="none";sig.style.clipPath="none";go();});})();</script>
+<script>
+/* A faint light with a tail that runs along the black gaps between the clips.
+   Vertical gaps scroll left with the clips; on the top, bottom or middle line the light
+   heads back towards the centre, so it stays roughly in the middle of the screen. */
+(function(){
+  var wall = document.getElementById('wall'); if (!wall || !window.requestAnimationFrame) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var PAD = 14, cv = document.createElement('canvas'); cv.className = 'gap-light'; cv.setAttribute('aria-hidden', 'true');
+  wall.parentNode.insertBefore(cv, wall.nextSibling);
+  var ctx = cv.getContext('2d'), dpr = 1, W = 0, H = 0, g = 6, on = false;
+  function size(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2); W = wall.clientWidth; H = wall.clientHeight;
+    g = parseFloat(getComputedStyle(wall).columnGap) || 6;
+    VS = Math.max(0.11, H / 2300); HS = Math.max(0.15, VS * 1.35);
+    cv.style.left = (wall.offsetLeft - PAD) + 'px'; cv.style.top = (wall.offsetTop - PAD) + 'px';
+    cv.style.width = (W + 2 * PAD) + 'px'; cv.style.height = (H + 2 * PAD) + 'px';
+    cv.width = Math.round((W + 2 * PAD) * dpr); cv.height = Math.round((H + 2 * PAD) * dpr);
+  }
+  /* column boundaries (middle of each vertical gap) and which columns are small (have a middle gap) */
+  function layout(){
+    var wr = wall.getBoundingClientRect(), sl = wall.scrollLeft, xs = {}, small = [];
+    Array.prototype.forEach.call(wall.children, function(t){
+      var r = t.getBoundingClientRect(), L = r.left - wr.left + sl, R = r.right - wr.left + sl;
+      xs[Math.round(L - g / 2)] = 1; xs[Math.round(R + g / 2)] = 1;
+      if (!t.classList.contains('big') && r.top - wr.top < H / 3) small.push([L, R]);
+    });
+    return { xs: Object.keys(xs).map(Number).sort(function(a, b){ return a - b; }), small: small };
+  }
+  function nextX(lay, x, dir){ var a = lay.xs; if (dir > 0) { for (var i = 0; i < a.length; i++) if (a[i] > x + 2) return a[i]; }
+    else { for (var j = a.length - 1; j >= 0; j--) if (a[j] < x - 2) return a[j]; } return null; }
+  function hasMid(lay, x, dir){ return lay.small.some(function(s){ return dir > 0 ? Math.abs(s[0] - g / 2 - x) < 3 : Math.abs(s[1] + g / 2 - x) < 3; }); }
+
+  var VS = 0.11, HS = 0.15, TAIL = 900;           /* px per ms, tail length in ms; VS grows on short strips */
+  var st = null, trail = [], lastSL = 0, lastT = 0;
+  function start(){
+    var lay = layout(), c = wall.scrollLeft + W / 2, best = null;
+    lay.xs.forEach(function(x){ if (best === null || Math.abs(x - c) < Math.abs(best - c)) best = x; });
+    if (best === null) return false;
+    st = { x: best, y: -1, vy: 1, mode: 'v', midDone: false }; trail = []; return true;
+  }
+  /* aim a bit right of centre, so the drift during the next vertical run carries it across the middle */
+  function aim(){ return wall.scrollLeft + W / 2 + (H / VS) * 0.05 / 2; }
+  function turnH(yLine){
+    var lay = layout(), t = aim(), tx = null;
+    lay.xs.forEach(function(x){ if (Math.abs(x - st.x) > 2 && (tx === null || Math.abs(x - t) < Math.abs(tx - t))) tx = x; });
+    if (tx === null) return;
+    st.mode = 'h'; st.tx = tx; st.dir = tx > st.x ? 1 : -1; st.y = yLine;
+  }
+  function step(dt){
+    var mid = H / 2;
+    if (st.mode === 'v') {
+      var y0 = st.y; st.y += st.vy * VS * dt;
+      if (!st.midDone && (y0 - mid) * (st.y - mid) <= 0) {
+        st.midDone = true;
+        var lay = layout(), d = aim() > st.x ? 1 : -1;
+        if (Math.random() < 0.4 && hasMid(lay, st.x, d)) { st.keepVy = st.vy; st.mode = 'h'; st.y = mid; st.dir = d; st.tx = nextX(lay, st.x, d); st.afterMid = true; return; }
+      }
+      if (st.y >= H + 1 || st.y <= -1) { st.y = st.y > mid ? H + 1 : -1; turnH(st.y); st.afterMid = false; }
+    } else {
+      st.x += st.dir * HS * dt;
+      if ((st.dir > 0 && st.x >= st.tx) || (st.dir < 0 && st.x <= st.tx)) {
+        st.x = st.tx; st.mode = 'v';
+        if (st.afterMid) { st.vy = st.keepVy; st.afterMid = false; }
+        else { st.vy = st.y > mid ? -1 : 1; st.midDone = false; }
+      }
+    }
+  }
+  function draw(now){
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W + 2 * PAD, H + 2 * PAD);
+    var sl = wall.scrollLeft, ox = PAD - sl, oy = PAD;
+    while (trail.length && now - trail[0].t > TAIL) trail.shift();
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (var i = 1; i < trail.length; i++) {
+      var a = trail[i - 1], b = trail[i], k = 1 - (now - b.t) / TAIL;
+      ctx.strokeStyle = 'rgba(255,255,255,' + (0.42 * k * k).toFixed(3) + ')';
+      ctx.lineWidth = Math.max(0.6, g * 0.32 * (0.4 + 0.6 * k));
+      ctx.beginPath(); ctx.moveTo(a.x + ox, a.y + oy); ctx.lineTo(b.x + ox, b.y + oy); ctx.stroke();
+    }
+    var hx = st.x + ox, hy = st.y + oy, R = g * 2.2 + 4, gr = ctx.createRadialGradient(hx, hy, 0, hx, hy, R);
+    gr.addColorStop(0, 'rgba(255,255,255,.75)'); gr.addColorStop(.25, 'rgba(255,255,255,.28)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(hx, hy, R, 0, 6.2832); ctx.fill();
+  }
+  function frame(t){
+    requestAnimationFrame(frame);
+    if (!on) { lastT = 0; return; }
+    var dt = lastT ? Math.min(t - lastT, 50) : 0; lastT = t;
+    if (!W) size();
+    var sl = wall.scrollLeft, dsl = sl - lastSL; lastSL = sl;
+    if (Math.abs(dsl) > W / 2 && st) { st.x += dsl; if (st.tx != null) st.tx += dsl; trail.forEach(function(p){ p.x += dsl; }); }   /* endless-loop jump */
+    if (!st && !start()) return;
+    var sx = st.x - sl; if (sx < -W * 0.1 || sx > W * 1.1) { if (!start()) return; }
+    step(dt); trail.push({ x: st.x, y: st.y, t: t }); draw(t);
+  }
+  size(); lastSL = wall.scrollLeft;
+  var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ size(); st = null; }, 250); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ on = es[0].isIntersecting; }, { threshold: 0 }).observe(wall); else on = true;
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
