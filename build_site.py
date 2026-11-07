@@ -15,6 +15,16 @@ FACEBOOK = 'https://www.facebook.com/officialarisvalentino'
 
 # ---------- images: SEO file names + alt texts (de, en) ----------
 IMAGES = {
+    'img/pol/stage-lights.jpg': ('img/aris-valentino-polaroid-buehne-blaues-licht.jpg', 'Aris Valentino singt auf der Bühne in blauem Licht', 'Aris Valentino singing on stage in blue light'),
+    'img/pol/band-bw.jpg': ('img/aris-valentino-polaroid-band-rock-schwarz-weiss.jpg', 'Aris Valentino und Band rocken auf der Bühne, Schwarz-Weiß', 'Aris Valentino and his band rocking on stage, black and white'),
+    'img/pol/crowd-white.jpg': ('img/aris-valentino-polaroid-publikum-live.jpg', 'Aris Valentino singt vor klatschendem Publikum', 'Aris Valentino singing to a clapping crowd'),
+    'img/pol/stage-red.jpg': ('img/aris-valentino-polaroid-live-rotes-licht.jpg', 'Aris Valentino live auf der Bühne in rotem Licht, Arm erhoben', 'Aris Valentino live on stage in red light, arm raised'),
+    'img/pol/singing-bw.jpg': ('img/aris-valentino-polaroid-mikrofon-gitarre.jpg', 'Aris Valentino singt am Mikrofon mit Gitarre, Schwarz-Weiß', 'Aris Valentino singing at the microphone with guitar, black and white'),
+    'img/pol/guitarist-1.jpg': ('img/aris-valentino-polaroid-band-gitarrist.jpg', 'Gitarrist der Band von Aris Valentino live auf der Bühne', 'Guitarist of Aris Valentino’s band live on stage'),
+    'img/pol/crowd-2.jpg': ('img/aris-valentino-polaroid-nach-der-show.jpg', 'Aris Valentino und Band mit dem Publikum nach einer Show', 'Aris Valentino and band with the audience after a show'),
+    'img/pol/acoustic-bw.jpg': ('img/aris-valentino-polaroid-akustik-live.jpg', 'Aris Valentino singt live mit Akustikgitarre, Schwarz-Weiß', 'Aris Valentino singing live with acoustic guitar, black and white'),
+    'img/pol/stage-setup.jpg': ('img/aris-valentino-polaroid-buehne-banner.jpg', 'Bühne mit Aris-Valentino-Banner in grünem Licht', 'Stage set up with the Aris Valentino banner in green light'),
+    'img/pol/mustang.jpg': ('img/aris-valentino-polaroid-nacht-oldtimer.jpg', 'Aris Valentino bei Nacht vor einem roten Oldtimer', 'Aris Valentino at night in front of a red classic car'),
     'img/hero-wide.jpg': ('img/aris-valentino-pop-rock-saenger.jpg', 'Aris Valentino, Pop-Rock-Sänger und Songwriter, in brauner Lederjacke vor blauem Himmel', 'Aris Valentino, pop rock singer and songwriter, in a brown leather jacket against a blue sky'),
     'img/about-close.jpg': ('img/aris-valentino-portrait-lederjacke.jpg', 'Aris Valentino in Lederjacke mit Gitarre, Schwarz-Weiß-Porträt', 'Aris Valentino in a leather jacket with a guitar, black and white portrait'),
     'img/about.jpg': ('img/aris-valentino-portrait-lederjacke-gitarre.jpg', 'Aris Valentino in Lederjacke mit weißer E-Gitarre, Schwarz-Weiß-Porträt', 'Aris Valentino in a leather jacket with a white electric guitar, black and white portrait'),
