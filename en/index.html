@@ -50,6 +50,67 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--fg);outline-offset:
 .mono{font-family:var(--f-mono);font-weight:500;font-stretch:112%;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 body{font-variant-numeric:tabular-nums}
 
+/* Music: cover flow over the song's own video. Only colours, fonts, rows and buttons of the existing system. */
+.mf{position:relative;isolation:isolate;overflow:hidden;overflow:clip;padding-block:clamp(40px,6vh,72px) clamp(36px,5vh,64px);margin-top:clamp(64px,8vw,112px)}
+.mf-bg{position:absolute;inset:0;z-index:-1;background:var(--bg)}
+.mf-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op,50% 40%);opacity:0;transition:opacity 1s ease;
+  filter:blur(2px) brightness(.32) contrast(1.05);transform:scale(1.06)}
+.mf-v.on{opacity:1}
+@media (prefers-reduced-motion:no-preference){.mf-v.on{animation:mf-kb 24s ease-in-out infinite alternate}}
+@keyframes mf-kb{from{transform:scale(1.06)}to{transform:scale(1.16)}}
+.mf-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 75% 70% at 50% 45%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 75%,#000 100%),linear-gradient(to bottom,#000 0,rgba(0,0,0,0) 14%,rgba(0,0,0,0) 86%,#000 100%)}
+.mf-grain{position:absolute;inset:0;opacity:.28;pointer-events:none;background-size:200px 200px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mf-in{position:relative}
+.mf-in h2{margin-bottom:clamp(8px,2vh,20px)}
+
+.mf-stage{--cw:clamp(190px,min(36vh,30vw),380px);position:relative;height:calc(var(--cw) * 1.06);display:flex;align-items:center;justify-content:center}
+.mf-flow{position:relative;width:100%;height:100%;outline:none;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.mf-flow:focus-visible{outline:2px solid var(--fg);outline-offset:6px}
+.mf-card{all:unset;display:block;box-sizing:border-box;position:absolute;left:50%;top:50%;width:var(--cw);height:var(--cw);cursor:pointer;will-change:transform;z-index:var(--z,1);
+  transform:translate(-50%,-50%) translateX(var(--x,0)) scale(var(--s,1));opacity:var(--o,1);
+  transition:transform .55s cubic-bezier(.22,.61,.36,1),opacity .55s cubic-bezier(.22,.61,.36,1);box-shadow:0 30px 60px -20px rgba(0,0,0,.85)}
+.mf-card img{display:block;width:100%;height:100%;object-fit:cover;background:var(--ph);pointer-events:none}
+.mf-card::after{content:"";position:absolute;inset:0;background:#000;opacity:var(--d,0);transition:opacity .55s cubic-bezier(.22,.61,.36,1)}
+.mf-card:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.mf-card.c0{--x:0;--s:1;--d:0;--z:10;cursor:default}
+.mf-card.r1{--x:calc(var(--cw) * .62);--s:.83;--d:.22;--z:9}
+.mf-card.l1{--x:calc(var(--cw) * -.62);--s:.83;--d:.22;--z:9}
+.mf-card.r2{--x:calc(var(--cw) * 1.06);--s:.69;--d:.39;--z:8;--o:0;pointer-events:none}
+.mf-card.l2{--x:calc(var(--cw) * -1.06);--s:.69;--d:.39;--z:8;--o:0;pointer-events:none}
+
+.mf-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;border:1px solid var(--fg);background:transparent;color:var(--fg);font-size:18px;cursor:pointer;transition:background .2s,color .2s}
+.mf-arrow:hover{background:var(--fg);color:var(--bg)}
+.mf-arrow.prev{left:0}.mf-arrow.next{right:0}
+
+.mf-info{max-width:760px;margin:clamp(14px,3vh,28px) auto 0}
+.mf-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px 20px}
+.mf-title h3{margin:0;font-family:var(--f-display);font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:clamp(24px,3.2vw,40px);line-height:1;letter-spacing:-.01em}
+.mf-title p{margin:6px 0 0}
+.mf-play{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 20px 0 16px;border-radius:999px;border:0;background:var(--fg);color:var(--bg);font:600 13px/1 var(--f-body);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:transform .2s}
+.mf-play:hover{transform:scale(1.03)}
+.mf-play .ico{position:relative;width:14px;height:14px;flex:none}
+.mf-play .ico::before{content:"";position:absolute;left:2px;top:0;border-left:12px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.mf-play[aria-pressed="true"] .ico::before{left:1px;top:1px;width:12px;height:12px;border:0;background:linear-gradient(90deg,currentColor 0 4px,transparent 4px 8px,currentColor 8px)}
+.mf-count{white-space:nowrap}
+.mf-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0 24px;margin-top:clamp(10px,2vh,18px);border-top:1px solid var(--line)}
+.mf-links a{display:flex;justify-content:space-between;align-items:center;padding-block:12px;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--f-display);font-weight:700;font-stretch:112%;font-size:15px;text-transform:uppercase;transition:padding .25s}
+.mf-links a span{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);transition:color .2s,transform .25s}
+.mf-links a:hover{padding-left:8px}
+.mf-links a:hover span{color:var(--fg);transform:translateX(-4px)}
+
+@media (max-width:720px){
+  .mf-stage{--cw:min(58vw,260px);height:calc(var(--cw) * 1.08)}
+  .mf-card.r1{--x:calc(var(--cw) * .5)}.mf-card.l1{--x:calc(var(--cw) * -.5)}
+  .mf-arrow{width:38px;height:38px;font-size:15px;background:rgba(0,0,0,.45)}
+  .mf-arrow.prev{left:-6px}.mf-arrow.next{right:-6px}
+  .mf-head{grid-template-columns:minmax(0,1fr) auto;text-align:left}
+  .mf-head .mf-title{grid-column:1/-1;grid-row:1}
+  .mf-head .mf-play{grid-row:2;justify-self:start}
+  .mf-head .mf-count{grid-row:2;justify-self:end}
+  .mf-links{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.mf-card,.mf-card::after{transition-duration:.2s}.mf-v{transition-duration:.3s}}
 /* header */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,0));transition:background-color .3s}
@@ -314,16 +375,34 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
 </div>
 <p class="mono reels-more"><a href="/en/booking#shows">All past shows ↗</a></p>
 </section>
-<section class="wrap" id="music">
-<h2>Music</h2>
-<div class="past-head">
-<h3>Latest releases</h3>
+<section aria-label="Music" class="mf" id="music">
+<div aria-hidden="true" class="mf-bg">
+<video class="mf-v" data-video="/songvid/changes.mp4" loop="" muted="" playsinline="" poster="/songvid/changes.jpg" preload="none" style="--op:72% 35%"></video>
+<video class="mf-v" data-video="/songvid/miracle.mp4" loop="" muted="" playsinline="" poster="/songvid/miracle.jpg" preload="none" style="--op:42% 40%"></video>
+<video class="mf-v" data-video="/songvid/rod.mp4" loop="" muted="" playsinline="" poster="/songvid/rod.jpg" preload="none" style="--op:45% 30%"></video>
+<video class="mf-v" data-video="/songvid/iaal.mp4" loop="" muted="" playsinline="" poster="/songvid/iaal.jpg" preload="none" style="--op:52% 35%"></video>
+<div class="mf-grain"></div>
 </div>
-<div class="rows">
-<a class="row track" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" target="_blank" rel="noopener"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span class="t">Changes</span><span class="r">Single ↗</span></a>
-<a class="row track" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" target="_blank" rel="noopener"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span class="t">Miracle</span><span class="r">Single ↗</span></a>
-<a class="row track" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" target="_blank" rel="noopener"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span class="t">If It Ain't About Love</span><span class="r">Single ↗</span></a>
-<a class="row track" href="https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK" target="_blank" rel="noopener"><img alt="" class="art" height="96" src="/img/aris-valentino-single-cover.jpg" width="96"/><span class="t">Ride or Die</span><span class="r">Single ↗</span></a>
+<div class="wrap mf-in">
+<h2>Music</h2>
+<div class="mf-stage">
+<button aria-label="Previous song" class="mf-arrow prev" id="mfPrev" type="button"><span aria-hidden="true">←</span></button>
+<div aria-label="Songs" aria-roledescription="carousel" class="mf-flow" id="mfFlow" tabindex="0">
+<button aria-label="CHANGES" class="mf-card" type="button"><img alt="" draggable="false" height="800" src="/img/aris-valentino-single-cover.jpg" width="800"/></button>
+<button aria-label="MIRACLE" class="mf-card" type="button"><img alt="" draggable="false" height="800" src="/img/aris-valentino-single-cover.jpg" width="800"/></button>
+<button aria-label="RIDE OR DIE" class="mf-card" type="button"><img alt="" draggable="false" height="800" src="/img/aris-valentino-single-cover.jpg" width="800"/></button>
+<button aria-label="IF IT AIN'T ABOUT LOVE" class="mf-card" type="button"><img alt="" draggable="false" height="800" src="/img/aris-valentino-single-cover.jpg" width="800"/></button>
+</div>
+<button aria-label="Next song" class="mf-arrow next" id="mfNext" type="button"><span aria-hidden="true">→</span></button>
+</div>
+<div aria-live="polite" class="mf-info">
+<div class="mf-head">
+<button aria-pressed="false" class="mf-play" id="mfPlay" type="button"><span aria-hidden="true" class="ico"></span><span class="lbl">Play preview</span></button>
+<div class="mf-title"><h3 id="mfTitle">CHANGES</h3><p class="mono" id="mfMeta">2026 · Single</p></div>
+<span class="mono mf-count" id="mfCount">01 / 04</span>
+</div>
+<div class="mf-links" id="mfLinks"></div>
+</div>
 </div>
 </section>
 <div aria-hidden="true" class="strip"><div class="bg"></div></div>
@@ -476,5 +555,118 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
 })();
 </script>
 <script>document.querySelectorAll('a.logo[href="#top"]').forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});if(location.hash)history.replaceState(null,"",location.pathname+location.search);});});if(location.hash==="#top")history.replaceState(null,"",location.pathname+location.search);</script>
+<script>
+/* Music cover flow: one audio element for all previews. The first start has to be a click (browser rule);
+   after that "play" stays on: switching songs starts the next one, and a finished preview moves on by itself. */
+(function(){
+  var flow = document.getElementById('mfFlow'); if (!flow) return;
+  var de = document.documentElement.lang === 'de';
+  var SPOTIFY = 'https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK';
+  var SONGS = [
+    { t:'CHANGES', y:'2026', a:'/audio/aris-valentino-changes-hoerprobe.mp3', links:[['Spotify', SPOTIFY]] },
+    { t:'MIRACLE', y:'2026', a:'/audio/aris-valentino-miracle-hoerprobe.mp3', links:[['Spotify', 'https://open.spotify.com/track/7z4wkRuoBm3JEGzrjJSBxT']] },
+    { t:'RIDE OR DIE', y:'2026', a:'/audio/aris-valentino-ride-or-die-hoerprobe.mp3', links:[['Spotify', SPOTIFY]] },
+    { t:'IF IT AIN’T ABOUT LOVE', y:'2025', a:'/audio/aris-valentino-if-it-aint-about-love-hoerprobe.mp3', links:[['Spotify', SPOTIFY]] }
+  ];
+  var cards = [].slice.call(flow.querySelectorAll('.mf-card')), vids = [].slice.call(document.querySelectorAll('.mf-v'));
+  var n = SONGS.length, cur = 0, armed = false, visible = false, fadeT = null;
+  var audio = new Audio(); audio.preload = 'none';
+  var playBtn = document.getElementById('mfPlay'), lbl = playBtn.querySelector('.lbl');
+  var POS = { '0':'c0', '1':'r1', '-1':'l1', '2':'r2', '-2':'l2' };
+  function rel(i){ var r = ((i - cur) % n + n) % n; return r > n / 2 ? r - n : r; }
+  function pad(k){ return (k < 10 ? '0' : '') + k; }
+
+  function setVideo(){
+    vids.forEach(function(v, i){
+      if (i === cur) {
+        if (!v.getAttribute('src')) { v.src = v.getAttribute('data-video'); }
+        v.classList.add('on');
+        if (visible) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      } else {
+        v.classList.remove('on');
+        (function(x){ setTimeout(function(){ if (!x.classList.contains('on')) x.pause(); }, 1050); })(v);
+      }
+    });
+  }
+  function setInfo(){
+    var s = SONGS[cur];
+    document.getElementById('mfTitle').textContent = s.t;
+    document.getElementById('mfMeta').textContent = s.y + ' · Single';
+    document.getElementById('mfCount').textContent = pad(cur + 1) + ' / ' + pad(n);
+    document.getElementById('mfLinks').innerHTML = s.links.map(function(l){
+      return '<a href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '<span>' + (de ? 'Öffnen' : 'Open') + ' ↗</span></a>';
+    }).join('');
+  }
+  function setPlayBtn(){
+    var on = armed && !audio.paused;
+    playBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    lbl.textContent = on ? 'Pause' : (de ? 'Hörprobe abspielen' : 'Play preview');
+  }
+  function fadeOut(done){
+    var finished = false;
+    function fin(){ if (finished) return; finished = true; clearInterval(fadeT); fadeT = null; audio.pause(); audio.volume = 1; done(); }
+    if (audio.paused) { fin(); return; }
+    var v = audio.volume; clearInterval(fadeT);
+    fadeT = setInterval(function(){ v -= 0.12; if (v <= 0) fin(); else { try { audio.volume = v; } catch (e) {} } }, 25);
+    setTimeout(fin, 280);   /* iPhones ignore volume changes: stop anyway after the fade time */
+  }
+  function startAudio(){
+    clearInterval(fadeT); fadeT = null;
+    var src = SONGS[cur].a;
+    if (audio.getAttribute('src') !== src) { audio.src = src; }
+    audio.volume = 1;
+    var p = audio.play(); if (p && p.catch) p.catch(function(){ armed = false; setPlayBtn(); });
+    setPlayBtn();
+  }
+  function go(k){
+    cur = (k % n + n) % n;
+    cards.forEach(function(c, i){
+      var r = rel(i);
+      c.className = 'mf-card ' + POS[String(r)];
+      c.setAttribute('aria-hidden', r === 0 ? 'false' : 'true');
+      c.tabIndex = Math.abs(r) === 1 ? 0 : -1;
+    });
+    setInfo(); setVideo();
+    if (armed) {
+      /* same element, already unlocked by the first click, so it may start without a new tap */
+      if (!audio.paused) fadeOut(startAudio); else startAudio();
+    }
+  }
+
+  playBtn.addEventListener('click', function(){
+    if (armed && !audio.paused) { armed = false; audio.pause(); setPlayBtn(); return; }
+    armed = true; startAudio();
+  });
+  audio.addEventListener('ended', function(){ if (armed) go(cur + 1); });
+  audio.addEventListener('pause', setPlayBtn); audio.addEventListener('play', setPlayBtn);
+
+  document.getElementById('mfPrev').addEventListener('click', function(){ go(cur - 1); });
+  document.getElementById('mfNext').addEventListener('click', function(){ go(cur + 1); });
+  cards.forEach(function(c, i){ c.addEventListener('click', function(){ if (moved) return; var r = rel(i); if (r) go(cur + r); }); });
+  flow.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') { go(cur + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { go(cur - 1); e.preventDefault(); }
+  });
+  var x0 = null, moved = false;
+  flow.addEventListener('pointerdown', function(e){ x0 = e.clientX; moved = false; });
+  window.addEventListener('pointerup', function(e){
+    if (x0 === null) return; var d = e.clientX - x0; x0 = null;
+    if (Math.abs(d) > 40) { moved = true; go(cur + (d < 0 ? 1 : -1)); setTimeout(function(){ moved = false; }, 60); }
+  });
+  window.addEventListener('pointercancel', function(){ x0 = null; });
+
+  /* the background video only runs while the section is on screen */
+  var sec = document.getElementById('music');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){
+      visible = es[0].isIntersecting;
+      var v = vids[cur];
+      if (visible) { if (!v.getAttribute('src')) v.src = v.getAttribute('data-video'); var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      else v.pause();
+    }, { rootMargin: '200px 0px' }).observe(sec);
+  } else { visible = true; }
+  go(0);
+})();
+</script>
 </body>
 </html>
