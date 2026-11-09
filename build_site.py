@@ -187,7 +187,7 @@ img{{max-width:100%}}
 '''
     html = html.replace("v.poster = c.poster;", "v.poster = c.poster;")
     if lang == 'en':
-        html = re.sub(r'((?:src|href|poster|data-audio)=")(img|vid2|vid|fonts|audio|downloads)/', r'\1../\2/', html)
+        html = re.sub(r'((?:src|href|poster|data-audio|data-video)=")(img|vid2|vid|songvid|fonts|audio|downloads)/', r'\1../\2/', html)
         html = re.sub(r"(['(\"])(vid2|img/g)/", r'\1../\2/', html)
         html = html.replace('url(fonts/', 'url(../fonts/').replace('url("img/', 'url("../img/')
         html = html.replace('href="impressum.html"', 'href="../impressum.html"').replace('href="datenschutz.html"', 'href="../datenschutz.html"')
@@ -299,6 +299,7 @@ def main():
         shutil.copy(os.path.join(SRC, old), os.path.join(DIST, new))
     shutil.copytree(os.path.join(SRC, 'fonts'), os.path.join(DIST, 'fonts'))
     shutil.copytree(os.path.join(SRC, 'vid2'), os.path.join(DIST, 'vid2'))
+    shutil.copytree(os.path.join(SRC, 'songvid'), os.path.join(DIST, 'songvid'))
     shutil.copytree(os.path.join(SRC, 'audio'), os.path.join(DIST, 'audio'))
     shutil.copytree(os.path.join(SRC, 'downloads'), os.path.join(DIST, 'downloads'))
     shutil.copytree(os.path.join(SRC, 'lifeline'), os.path.join(DIST, 'lifeline'))
@@ -392,7 +393,7 @@ def clean_urls():
         ]
         for a, b in rep:
             h = h.replace(a, b)
-        h = re.sub(r'((?:src|href|poster|data-audio)=")(?:\.\./)?(img|vid2|fonts|audio|downloads)/', r'\1/\2/', h)
+        h = re.sub(r'((?:src|href|poster|data-audio|data-video)=")(?:\.\./)?(img|vid2|songvid|fonts|audio|downloads)/', r'\1/\2/', h)
         h = re.sub(r"(['(\"])(?:\.\./)?(vid2|img/g)/", r'\1/\2/', h)
         h = h.replace('url(../fonts/', 'url(/fonts/').replace('url(fonts/', 'url(/fonts/').replace('url("../img/', 'url("/img/').replace('url("img/', 'url("/img/')
         def ext(m):
