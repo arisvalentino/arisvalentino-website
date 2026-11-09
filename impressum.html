@@ -404,6 +404,73 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .pol-count{font-size:12px;letter-spacing:.18em;color:var(--muted);min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
 @media (max-width:639px){.pol{--w:62vw}.pol.p1,.pol.m1{--s:.8}.pol.p1{--x:52%}.pol.m1{--x:-52%}.pol.p2{--x:84%}.pol.m2{--x:-84%}.pol-stage{height:clamp(360px,100vw,460px)}}
 @media (prefers-reduced-motion:reduce){.pol{transition:opacity .3s ease}.pol.p0.lift{animation:none}}
+/* Music: cover flow over the song's own video. Only colours, fonts, rows and buttons of the existing system. */
+.mf{position:relative;isolation:isolate;overflow:hidden;overflow:clip;padding-block:clamp(40px,6vh,72px) clamp(36px,5vh,64px);margin-top:clamp(64px,8vw,112px)}
+.mf-bg{position:absolute;inset:0;z-index:-1;background:var(--bg)}
+.mf-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op,50% 40%);opacity:0;transition:opacity 1s ease;
+  filter:blur(2px) brightness(.32) contrast(1.05);transform:scale(1.06)}
+.mf-v.on{opacity:1}
+@media (prefers-reduced-motion:no-preference){.mf-v.on{animation:mf-kb 24s ease-in-out infinite alternate}}
+@keyframes mf-kb{from{transform:scale(1.06)}to{transform:scale(1.16)}}
+.mf-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 75% 70% at 50% 45%,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 75%,#000 100%),linear-gradient(to bottom,#000 0,rgba(0,0,0,0) 14%,rgba(0,0,0,0) 86%,#000 100%)}
+.mf-grain{position:absolute;inset:0;opacity:.28;pointer-events:none;background-size:200px 200px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mf-in{position:relative}
+.mf-in h2{margin-bottom:clamp(8px,2vh,20px)}
+
+.mf-stage{--cw:clamp(190px,min(36vh,30vw),380px);position:relative;height:calc(var(--cw) * 1.06);display:flex;align-items:center;justify-content:center}
+.mf-flow{position:relative;width:100%;height:100%;outline:none;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.mf-flow:focus-visible{outline:2px solid var(--fg);outline-offset:6px}
+.mf-card{all:unset;display:block;box-sizing:border-box;position:absolute;left:50%;top:50%;width:var(--cw);height:var(--cw);cursor:pointer;will-change:transform;z-index:var(--z,1);
+  transform:translate(-50%,-50%) translateX(var(--x,0)) scale(var(--s,1));opacity:var(--o,1);
+  transition:transform .55s cubic-bezier(.22,.61,.36,1),opacity .55s cubic-bezier(.22,.61,.36,1);box-shadow:0 30px 60px -20px rgba(0,0,0,.85)}
+.mf-card img{display:block;width:100%;height:100%;object-fit:cover;background:var(--ph);pointer-events:none}
+.mf-card::after{content:"";position:absolute;inset:0;background:#000;opacity:var(--d,0);transition:opacity .55s cubic-bezier(.22,.61,.36,1)}
+.mf-card:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.mf-card.c0{--x:0;--s:1;--d:0;--z:10;cursor:default}
+.mf-card.r1{--x:calc(var(--cw) * .62);--s:.83;--d:.22;--z:9}
+.mf-card.l1{--x:calc(var(--cw) * -.62);--s:.83;--d:.22;--z:9}
+.mf-card.r2{--x:calc(var(--cw) * 1.06);--s:.69;--d:.39;--z:8;--o:0;pointer-events:none}
+.mf-card.l2{--x:calc(var(--cw) * -1.06);--s:.69;--d:.39;--z:8;--o:0;pointer-events:none}
+
+.mf-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;border:1px solid var(--fg);background:transparent;color:var(--fg);font-size:18px;cursor:pointer;transition:background .2s,color .2s}
+.mf-arrow:hover{background:var(--fg);color:var(--bg)}
+.mf-arrow.prev{left:0}.mf-arrow.next{right:0}
+
+.mf-info{max-width:760px;margin:clamp(14px,3vh,28px) auto 0}
+.mf-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px 20px}
+.mf-title h3{margin:0;font-family:var(--f-display);font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:clamp(24px,3.2vw,40px);line-height:1;letter-spacing:-.01em}
+.mf-title p{margin:6px 0 0}
+.mf-play{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 20px 0 16px;border-radius:999px;border:0;background:var(--fg);color:var(--bg);font:600 13px/1 var(--f-body);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:transform .2s}
+.mf-play:hover{transform:scale(1.03)}
+.mf-play .ico{position:relative;width:14px;height:14px;flex:none}
+.mf-play .ico::before{content:"";position:absolute;left:2px;top:0;border-left:12px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.mf-play[aria-pressed="true"] .ico::before{left:1px;top:1px;width:12px;height:12px;border:0;background:linear-gradient(90deg,currentColor 0 4px,transparent 4px 8px,currentColor 8px)}
+.mf-count{white-space:nowrap}
+.mf-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0 24px;margin-top:clamp(10px,2vh,18px);border-top:1px solid var(--line)}
+.mf-links a{display:flex;justify-content:space-between;align-items:center;padding-block:12px;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--f-display);font-weight:700;font-stretch:112%;font-size:15px;text-transform:uppercase;transition:padding .25s}
+.mf-links a span{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);transition:color .2s,transform .25s}
+.mf-links a:hover{padding-left:8px}
+.mf-links a:hover span{color:var(--fg);transform:translateX(-4px)}
+
+@media (max-width:720px){
+  .mf-stage{--cw:min(58vw,260px);height:calc(var(--cw) * 1.08)}
+  .mf-card.r1{--x:calc(var(--cw) * .5)}.mf-card.l1{--x:calc(var(--cw) * -.5)}
+  .mf-arrow{width:38px;height:38px;font-size:15px;background:rgba(0,0,0,.45)}
+  .mf-arrow.prev{left:-6px}.mf-arrow.next{right:-6px}
+  .mf-head{grid-template-columns:minmax(0,1fr) auto;text-align:left}
+  .mf-head .mf-title{grid-column:1/-1;grid-row:1}
+  .mf-head .mf-play{grid-row:2;justify-self:start}
+  .mf-head .mf-count{grid-row:2;justify-self:end}
+  .mf-links{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.mf-card,.mf-card::after{transition-duration:.2s}.mf-v{transition-duration:.3s}}
+/* booking: the covers are the point, the video is only texture */
+.mf-focus .mf-stage{--cw:clamp(220px,min(44vh,34vw),440px)}
+.mf-focus .mf-v{filter:blur(3px) brightness(.2) contrast(1.05)}
+.mf-focus .mf-grain{opacity:.32}
+.mf-focus .mf-card{box-shadow:0 40px 80px -24px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.06)}
+@media (max-width:720px){.mf-focus .mf-stage{--cw:min(66vw,300px)}}
 @media (max-width:999px){.mosaic{--g:5px}}
 @media (max-width:639px){.mosaic{--g:4px}}
 .facts-line{display:flex;flex-wrap:wrap;gap:8px 0;margin:20px 0 0}
