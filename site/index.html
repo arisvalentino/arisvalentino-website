@@ -85,6 +85,12 @@ body{font-variant-numeric:tabular-nums}
   .mf-links{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){.mf-card,.mf-card::after{transition-duration:.2s}.mf-v{transition-duration:.3s}}
+/* the covers are the point, the video is only texture */
+.mf-focus .mf-stage{--cw:clamp(220px,min(44vh,34vw),440px)}
+.mf-focus .mf-v{filter:blur(3px) brightness(.2) contrast(1.05)}
+.mf-focus .mf-grain{opacity:.32}
+.mf-focus .mf-card{box-shadow:0 40px 80px -24px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.06)}
+@media (max-width:720px){.mf-focus .mf-stage{--cw:min(66vw,300px)}}
 /* header */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,0));transition:background-color .3s}
@@ -351,7 +357,7 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
     <p class="mono reels-more"><a href="booking.html#shows" data-en="All past shows ↗" data-de="Alle bisherigen Shows ↗">All past shows ↗</a></p>
   </section>
 
-  <section id="music" class="mf" aria-label="Music">
+  <section id="music" class="mf mf-focus" aria-label="Music">
     <div class="mf-bg" aria-hidden="true">
       <video class="mf-v" muted playsinline loop preload="none" poster="songvid/changes.jpg" data-video="songvid/changes.mp4" style="--op:72% 35%"></video>
       <video class="mf-v" muted playsinline loop preload="none" poster="songvid/miracle.jpg" data-video="songvid/miracle.mp4" style="--op:42% 40%"></video>
