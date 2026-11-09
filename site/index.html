@@ -652,7 +652,7 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
   window.addEventListener('pointercancel', function(){ x0 = null; });
 
   /* the background video only runs while the section is on screen */
-  var sec = document.getElementById('music');
+  var sec = flow.closest('section');
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function(es){
       visible = es[0].isIntersecting;
