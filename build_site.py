@@ -72,7 +72,7 @@ def jsonld(page, lang):
         'url': DOMAIN + '/', 'image': DOMAIN + '/img/aris-valentino-pop-rock-saenger.jpg',
         'genre': ['Pop', 'Pop-Rock'],
         'foundingLocation': {'@type': 'Place', 'name': 'Köln', 'address': {'@type': 'PostalAddress', 'addressLocality': 'Köln', 'addressCountry': 'DE'}},
-        'sameAs': [SPOTIFY, INSTA, TIKTOK, FACEBOOK],
+        'sameAs': [SPOTIFY, INSTA, TIKTOK, FACEBOOK, 'https://music.apple.com/de/artist/aris-valentino/1505353040', 'https://amazon.de/music/player/artists/B08C9W38LX/aris-valentino', 'https://www.youtube.com/@aris-valentino', 'https://tidal.com/artist/aris-valentino/35704773'],
         'member': [{'@type': 'Person', 'name': n} for n in ['Aris Valentino', 'Niklas Bischop', 'Felix Martin', 'Samuel Bojko', 'Simon Finzel']],
         'email': 'mail@arisvalentino.com',
         'telephone': '+49 173 9760402',

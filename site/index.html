@@ -564,11 +564,13 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
   var flow = document.getElementById('mfFlow'); if (!flow) return;
   var de = document.documentElement.lang === 'de';
   var SPOTIFY = 'https://open.spotify.com/intl-de/artist/7dVIsUVDF1mmZ0CbGANwhK';
+  /* artist profiles until there are links per song */
+  var MORE = [['Apple Music', 'https://music.apple.com/de/artist/aris-valentino/1505353040'], ['YouTube', 'https://www.youtube.com/@aris-valentino']];
   var SONGS = [
-    { t:'CHANGES', y:'2026', a:'/audio/aris-valentino-changes-hoerprobe.mp3', links:[['Spotify', SPOTIFY]] },
-    { t:'MIRACLE', y:'2026', a:'/audio/aris-valentino-miracle-hoerprobe.mp3', links:[['Spotify', 'https://open.spotify.com/track/7z4wkRuoBm3JEGzrjJSBxT']] },
-    { t:'RIDE OR DIE', y:'2026', a:'/audio/aris-valentino-ride-or-die-hoerprobe.mp3', links:[['Spotify', SPOTIFY]] },
-    { t:'IF IT AIN’T ABOUT LOVE', y:'2025', a:'/audio/aris-valentino-if-it-aint-about-love-hoerprobe.mp3', links:[['Spotify', SPOTIFY]] }
+    { t:'CHANGES', y:'2026', a:'/audio/aris-valentino-changes-hoerprobe.mp3', links:[['Spotify', SPOTIFY]].concat(MORE) },
+    { t:'MIRACLE', y:'2026', a:'/audio/aris-valentino-miracle-hoerprobe.mp3', links:[['Spotify', 'https://open.spotify.com/track/7z4wkRuoBm3JEGzrjJSBxT']].concat(MORE) },
+    { t:'RIDE OR DIE', y:'2026', a:'/audio/aris-valentino-ride-or-die-hoerprobe.mp3', links:[['Spotify', SPOTIFY]].concat(MORE) },
+    { t:'IF IT AIN’T ABOUT LOVE', y:'2025', a:'/audio/aris-valentino-if-it-aint-about-love-hoerprobe.mp3', links:[['Spotify', SPOTIFY]].concat(MORE) }
   ];
   var cards = [].slice.call(flow.querySelectorAll('.mf-card')), vids = [].slice.call(document.querySelectorAll('.mf-v'));
   var n = SONGS.length, cur = 0, armed = false, visible = false, fadeT = null;
