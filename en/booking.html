@@ -372,16 +372,16 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @keyframes av-ping{0%{box-shadow:0 0 0 0 rgba(242,242,240,.45)}70%,100%{box-shadow:0 0 0 12px rgba(242,242,240,0)}}
 
 /* bio: big outlined title, photo left, text with a pull quote right */
-.bio2 .bio-k{margin:0 0 10px}
-.bio-title{font-size:clamp(40px,7.4vw,118px);line-height:.9;letter-spacing:-.02em;margin-bottom:clamp(28px,4vw,56px)}
+.bio-title{font-size:clamp(36px,4.6vw,76px);line-height:.92;letter-spacing:-.02em;margin:0 0 clamp(8px,1.2vw,16px)}
 .bio-title .o{display:block;color:transparent;-webkit-text-stroke:1.4px var(--fg)}
 @supports not (-webkit-text-stroke:1px #fff){.bio-title .o{color:var(--muted)}}
 .bio-title .n{display:block}
-.bio-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,88px);align-items:start}
+.bio-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,88px);align-items:center}
 .bio-pic{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;background:var(--ph)}
 .bio-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 .bio-pic:hover img{transform:scale(1.03)}
-.bio-text{display:flex;flex-direction:column;gap:clamp(18px,2.4vw,28px);min-width:0;padding-top:clamp(0px,1vw,12px)}
+.bio-text{display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);min-width:0}
+.bio-text .bio-k{margin:0 0 -6px}
 .bio-p{margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.7;color:var(--muted);max-width:60ch;hyphens:manual;-webkit-hyphens:manual}
 .bio-pull{margin:clamp(4px,1vw,10px) 0;padding-left:clamp(16px,2vw,24px);border-left:2px solid var(--fg);font-family:var(--f-display);font-weight:800;font-stretch:118%;text-transform:uppercase;font-size:clamp(24px,2.9vw,44px);line-height:1.02;letter-spacing:-.01em;color:var(--fg);text-wrap:balance}
 .bio-text .longbio{margin-top:4px}
@@ -590,13 +590,14 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 </p>
 </section>
 <section class="wrap bio2" id="bio">
-<p class="mono bio-k">Bio</p>
-<h2 class="bio-title"><span class="o">This is</span> <span class="n">Aris Valentino</span></h2>
 <div class="bio-grid">
 <figure class="bio-pic"><img alt="Aris Valentino in a leather jacket with a guitar, black and white portrait" height="1250" loading="lazy" src="/img/aris-valentino-portrait-lederjacke.jpg" width="1000"/></figure>
 <div class="bio-text">
+<p class="mono bio-k">Bio</p>
+<h2 class="bio-title"><span class="o">This is</span> <span class="n">Aris Valentino</span></h2>
 <p class="bio-p">Born in Germany’s Ruhr Valley, Greek-Cypriot roots, now at home in Cologne. Before his own name ever ended up on a record, he played ice hockey up to the youth national team, stood on theatre stages and spent years writing and producing for other artists.</p>
 <p class="bio-p">With his band he plays pop and rock, somewhere between Damiano David, Alex Warren and Miley Cyrus. Loud, honest and up close.</p>
+<p class="bio-p">Since 2022 he has played more than 50 shows, including Bochum Total, Zeltfestival Ruhr and Cologne Music Week. WDR Lokalzeit ran a feature on him, “If It Ain’t About Love” made Radio Essen’s Ruhrcharts, and WAZ and Rheinische Post have written about him.</p>
 <details class="longbio" id="longbio">
 <summary><span>Read the full bio</span><span aria-hidden="true" class="lb-plus">↓</span></summary>
 <div class="longbio-body" id="longbio-text">
