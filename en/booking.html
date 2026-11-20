@@ -224,7 +224,7 @@ a.row:hover .r{color:var(--fg);transform:translateX(-4px)}
   .under{animation:av-fade .9s ease 1s both}
   header .wrap{animation:av-fadeonly .9s ease .8s both}
   @supports (animation-timeline: view()){
-    section h2,.rows,.about,.facts,.about-pic,.grid3,.shot,.past,.contact .big,.contact .btns{animation:av-reveal linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+    section h2,.rows,.about,.facts,.about-pic,.bio-pic,.bio-text,.grid3,.shot,.past,.contact .big,.contact .btns{animation:av-reveal linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
     .hero .frame{animation:av-parallax linear both;animation-timeline:scroll();animation-range:0 100vh}
   }
   @supports (interpolate-size: allow-keywords){
@@ -371,6 +371,22 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @media (prefers-reduced-motion: no-preference){.sound[aria-checked="false"] .sw{animation:av-ping 2.4s ease-out infinite}}
 @keyframes av-ping{0%{box-shadow:0 0 0 0 rgba(242,242,240,.45)}70%,100%{box-shadow:0 0 0 12px rgba(242,242,240,0)}}
 
+/* bio: big outlined title, photo left, text with a pull quote right */
+.bio2 .bio-k{margin:0 0 10px}
+.bio-title{font-size:clamp(40px,7.4vw,118px);line-height:.9;letter-spacing:-.02em;margin-bottom:clamp(28px,4vw,56px)}
+.bio-title .o{display:block;color:transparent;-webkit-text-stroke:1.4px var(--fg)}
+@supports not (-webkit-text-stroke:1px #fff){.bio-title .o{color:var(--muted)}}
+.bio-title .n{display:block}
+.bio-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,88px);align-items:start}
+.bio-pic{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;background:var(--ph)}
+.bio-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.bio-pic:hover img{transform:scale(1.03)}
+.bio-text{display:flex;flex-direction:column;gap:clamp(18px,2.4vw,28px);min-width:0;padding-top:clamp(0px,1vw,12px)}
+.bio-p{margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.7;color:var(--muted);max-width:60ch;hyphens:manual;-webkit-hyphens:manual}
+.bio-pull{margin:clamp(4px,1vw,10px) 0;padding-left:clamp(16px,2vw,24px);border-left:2px solid var(--fg);font-family:var(--f-display);font-weight:800;font-stretch:118%;text-transform:uppercase;font-size:clamp(24px,2.9vw,44px);line-height:1.02;letter-spacing:-.01em;color:var(--fg);text-wrap:balance}
+.bio-text .longbio{margin-top:4px}
+@media (max-width:860px){.bio-grid{grid-template-columns:minmax(0,1fr)}.bio-pic{display:none}}
+@media (prefers-reduced-motion:reduce){.bio-pic img{transition:none}}
 .longbio{margin-top:14px;max-width:820px}
 .longbio summary{list-style:none;display:inline-flex;align-items:center;gap:8px;padding:2px 0;cursor:pointer;font-family:var(--f-mono);font-weight:500;font-stretch:112%;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);border-bottom:1px solid var(--line);transition:border-color .2s}
 .longbio summary::-webkit-details-marker{display:none}
@@ -573,17 +589,15 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 <span>Own in-ear setup</span>
 </p>
 </section>
-<section class="wrap" id="bio">
-<h2>Bio</h2>
-<div class="about-grid">
-<div class="about-text">
-<div class="about">
-<p class="lead">Aris Valentino is the kind of artist you discover before everyone else does.</p>
-<p>Raised in Germany’s Ruhr Valley with Greek-Cypriot roots, now based in Cologne. Before putting his own name on a record, he played ice hockey up to the youth national team, performed in theatre and spent years writing and producing for other artists. You can hear all of it: discipline and chaos in equal measure, a voice that stops you cold and a presence that fills the room before the first note. With his band he plays pop with a rock ’n’ roll soul, somewhere between Damiano David, Alex Warren and Miley Cyrus. Loud, honest and up close.</p>
-</div>
-</div>
-<figure class="about-pic"><img alt="Aris Valentino in a leather jacket with a guitar, black and white portrait" height="1250" loading="lazy" src="/img/aris-valentino-portrait-lederjacke.jpg" width="1000"/></figure>
-</div>
+<section class="wrap bio2" id="bio">
+<p class="mono bio-k">Bio</p>
+<h2 class="bio-title"><span class="o">This is</span> <span class="n">Aris Valentino</span></h2>
+<div class="bio-grid">
+<figure class="bio-pic"><img alt="Aris Valentino in a leather jacket with a guitar, black and white portrait" height="1250" loading="lazy" src="/img/aris-valentino-portrait-lederjacke.jpg" width="1000"/></figure>
+<div class="bio-text">
+<p class="bio-p">Born in Germany’s Ruhr Valley, Greek-Cypriot roots, now at home in Cologne. Before his own name ever ended up on a record, he played ice hockey up to the youth national team, stood on theatre stages and spent years writing and producing for other artists. You can hear it.</p>
+<blockquote class="bio-pull">Equal parts discipline and chaos.</blockquote>
+<p class="bio-p">Add a voice that makes you stop for a second and a presence that fills the room before the first note. With his band he plays pop with a rock ’n’ roll soul, somewhere between Damiano David, Alex Warren and Miley Cyrus. Loud, honest and up close – on stage and just as much after it.</p>
 <details class="longbio" id="longbio">
 <summary><span>Read the full bio</span><span aria-hidden="true" class="lb-plus">↓</span></summary>
 <div class="longbio-body" id="longbio-text">
@@ -595,6 +609,8 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 </div>
 <button class="copy" id="copy-bio" type="button">Copy text</button>
 </details>
+</div>
+</div>
 </section>
 <section aria-label="Listen" class="mf mf-focus" id="musik">
 <div aria-hidden="true" class="mf-bg">
