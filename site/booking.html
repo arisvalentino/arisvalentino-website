@@ -351,7 +351,10 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @keyframes av-ping{0%{box-shadow:0 0 0 0 rgba(242,242,240,.45)}70%,100%{box-shadow:0 0 0 12px rgba(242,242,240,0)}}
 
 /* bio: big outlined title, photo left, text with a pull quote right */
-.bio-title{font-size:clamp(36px,4.6vw,76px);line-height:.92;letter-spacing:-.02em;margin:0 0 clamp(8px,1.2vw,16px)}
+.bio-title{font-size:clamp(34px,4.6vw,76px);font-size:9.2cqi;line-height:.92;letter-spacing:-.02em;margin:0 0 clamp(8px,1.2vw,16px);cursor:default}
+.bio-title .o,.bio-title .n{transition:color .45s ease,-webkit-text-stroke-color .45s ease}
+.bio-title .n{-webkit-text-stroke:1.4px var(--fg)}
+@media (hover:hover){.bio-title:hover .o{color:var(--fg)}.bio-title:hover .n{color:transparent}}
 .bio-title .o{display:block;color:transparent;-webkit-text-stroke:1.4px var(--fg)}
 @supports not (-webkit-text-stroke:1px #fff){.bio-title .o{color:var(--muted)}}
 .bio-title .n{display:block}
@@ -359,9 +362,9 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .bio-pic{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;background:var(--ph)}
 .bio-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 .bio-pic:hover img{transform:scale(1.03)}
-.bio-text{display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);min-width:0}
+.bio-text{display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);min-width:0;container-type:inline-size}
 .bio-text .bio-k{margin:0 0 -6px}
-.bio-p{margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.7;color:var(--muted);max-width:60ch;hyphens:manual;-webkit-hyphens:manual}
+.bio-p{margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.7;color:var(--muted);text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:8 4 4}
 .bio-pull{margin:clamp(4px,1vw,10px) 0;padding-left:clamp(16px,2vw,24px);border-left:2px solid var(--fg);font-family:var(--f-display);font-weight:800;font-stretch:118%;text-transform:uppercase;font-size:clamp(24px,2.9vw,44px);line-height:1.02;letter-spacing:-.01em;color:var(--fg);text-wrap:balance}
 .bio-text .longbio{margin-top:4px}
 @media (max-width:860px){.bio-grid{grid-template-columns:minmax(0,1fr)}.bio-pic{display:none}}
@@ -576,7 +579,7 @@ form.req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
         <h2 class="bio-title"><span class="o" data-en="This is" data-de="Das ist">This is</span> <span class="n">Aris Valentino</span></h2>
         <p class="bio-p" data-en="Born in Germany’s Ruhr Valley, Greek-Cypriot roots, now at home in Cologne. Before his own name ever ended up on a record, he played ice hockey up to the youth national team, stood on theatre stages and spent years writing and producing for other artists." data-de="Geboren im Ruhrgebiet, griechisch-zypriotische Wurzeln, heute zuhause in Köln. Bevor sein eigener Name auf einer Platte stand, spielte er Eishockey bis in die Nachwuchs-Nationalmannschaft, stand auf der Theaterbühne und hat jahrelang für andere Artists geschrieben und produziert.">Born in Germany’s Ruhr Valley, Greek-Cypriot roots, now at home in Cologne. Before his own name ever ended up on a record, he played ice hockey up to the youth national team, stood on theatre stages and spent years writing and producing for other artists.</p>
         <p class="bio-p" data-en="With his band he plays pop and rock, somewhere between Damiano David, Alex Warren and Miley Cyrus. Loud, honest and up close." data-de="Mit seiner Band spielt er Pop und Rock, irgendwo zwischen Damiano David, Alex Warren und Miley Cyrus. Laut, ehrlich und ganz nah dran.">With his band he plays pop and rock, somewhere between Damiano David, Alex Warren and Miley Cyrus. Loud, honest and up close.</p>
-        <p class="bio-p" data-en="Since 2022 he has played more than 50 shows, including Bochum Total, Zeltfestival Ruhr and Cologne Music Week. WDR Lokalzeit ran a feature on him, “If It Ain’t About Love” made Radio Essen’s Ruhrcharts, and WAZ and Rheinische Post have written about him." data-de="Seit 2022 hat er über 50 Shows gespielt, darunter Bochum Total, das Zeltfestival Ruhr und die Cologne Music Week. Die WDR Lokalzeit hat einen eigenen Beitrag über ihn gezeigt, „If It Ain’t About Love“ lief in den Ruhrcharts von Radio Essen, und auch WAZ und Rheinische Post haben über ihn berichtet.">Since 2022 he has played more than 50 shows, including Bochum Total, Zeltfestival Ruhr and Cologne Music Week. WDR Lokalzeit ran a feature on him, “If It Ain’t About Love” made Radio Essen’s Ruhrcharts, and WAZ and Rheinische Post have written about him.</p>
+        <p class="bio-p" data-en="Since 2022 more than 50 shows, including Bochum Total, Zeltfestival Ruhr and Cologne Music Week. Plus radio and TV features on WDR, Radio Essen and Radio Bochum, and coverage in WAZ and Rheinische Post." data-de="Seit 2022 über 50 Shows, darunter Bochum Total, das Zeltfestival Ruhr und die Cologne Music Week. Dazu Radio- und TV-Features bei WDR, Radio Essen und Radio Bochum sowie Berichte in WAZ und Rheinischer Post.">Since 2022 more than 50 shows, including Bochum Total, Zeltfestival Ruhr and Cologne Music Week. Plus radio and TV features on WDR, Radio Essen and Radio Bochum, and coverage in WAZ and Rheinische Post.</p>
         <details class="longbio" id="longbio">
           <summary><span data-en="Read the full bio" data-de="Ausführliche Bio lesen">Read the full bio</span><span class="lb-plus" aria-hidden="true">↓</span></summary>
           <div class="longbio-body" id="longbio-text">
