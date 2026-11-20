@@ -54,10 +54,10 @@ FONT_CSS = '''@font-face{font-family:"Archivo";font-style:normal;font-display:sw
 LANG_CSS = '\n.lang a{text-decoration:none;padding:4px 6px;color:var(--muted)}\n.lang a:hover{color:var(--fg)}\n.lang a[aria-current]{color:var(--fg);text-decoration:underline;text-underline-offset:4px}\n'
 
 META = {
-    ('index', 'de'): ('Aris Valentino – Sänger & Songwriter | Pop mit Rock-’n’-Roll-Seele',
-                      'Aris Valentino: Pop mit Rock-’n’-Roll-Seele, große Stimme und energiegeladene Live-Show mit Band. Neue Musik, Live-Termine, Videos, Fotos und Booking.'),
-    ('index', 'en'): ('Aris Valentino – Singer & Songwriter | Pop with a rock ’n’ roll soul',
-                      'Aris Valentino: pop with a rock ’n’ roll soul, a big voice and a high-energy live show with band. New music, live dates, videos, photos and booking.'),
+    ('index', 'de'): ('Aris Valentino – Sänger & Songwriter | Pop & Live mit Band',
+                      'Aris Valentino: Pop, große Stimme und energiegeladene Live-Show mit Band. Neue Musik, Live-Termine, Videos, Fotos und Booking.'),
+    ('index', 'en'): ('Aris Valentino – Singer & Songwriter | Pop & live with band',
+                      'Aris Valentino: pop, a big voice and a high-energy live show with band. New music, live dates, videos, photos and booking.'),
     ('booking', 'de'): ('Booking – Aris Valentino & Band | Festivals & Live-Shows',
                         'Aris Valentino & Band buchen: 50+ Shows seit 2022, 3 ausverkaufte Headliner-Shows, Bochum Total, Zeltfestival Ruhr. Festivaltauglich mit eigenem In-Ear-Setup.'),
     ('booking', 'en'): ('Booking – Aris Valentino & Band | Festivals & live shows',
